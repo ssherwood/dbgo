@@ -1,0 +1,141 @@
+name: yugabyte
+schema: public
+host: localhost
+port: 5433
+user: yugabyte
+password: yugabyte
+#seed: 1656340955721561401
+defaults:
+  generators:
+    number:
+      generator-type: random
+      min-value: 0
+      max-value: 100000
+tables:
+  - name: users
+    columns:
+      - name: id
+        type: numeric
+        generator: serial
+        options:
+          start: 1
+      - name: account_status
+        type: character
+        max-length: 255
+        blank: 5
+        generator: custom-list
+        options:
+          generator-type: sequential
+          values:
+            - ACTIVE
+            - INACTIVE
+            - EXPIRED
+            - TERMINATED
+      - name: city
+        type: character
+        max-length: 255
+        generator: city
+      - name: state
+        type: string
+        max-length: 255
+        generator: state
+        default-value: OH
+      - name: auto_renew
+        type: boolean
+      - name: about
+        type: character
+        max-length: 255
+        nullable: false
+        generator: string
+        options:
+          generator-type: ascii
+          max-length: 100
+      - name: encryption_level
+        type: numeric
+        generator: integer
+        options:
+          generator-type: sequential
+          min-value: 5
+          max-value: 10
+  - name: user_account
+    columns:
+      - name: id
+        type: numeric
+        nullable: false
+        max-length: 64
+        generator: sequence
+        options:
+          sequence-name: user_account_id_seq
+      - name: account_status
+        type: character
+        nullable: true
+        max-length: 255
+        generator: custom-list
+        options:
+          generator-type: random
+          values:
+            - OPEN
+            - CLOSED
+            - HOLD
+      - name: city
+        type: character
+        nullable: true
+        max-length: 255
+        generator: string
+        options:
+          generator-type: ascii
+          max-length: 255
+          min-length: 1
+      - name: state
+        type: character
+        nullable: true
+        max-length: 255
+        generator: string
+        options:
+          generator-type: ascii
+          max-length: 255
+          min-length: 1
+      - name: auto_renew
+        type: boolean
+        nullable: true
+        generator: boolean
+      - name: about
+        type: character
+        nullable: true
+        max-length: 255
+        generator: string
+        options:
+          generator-type: ascii
+          max-length: 255
+          min-length: 1
+      - name: days_active
+        type: numeric
+        nullable: true
+        max-length: 32
+        generator: integer
+        options:
+          generator-type: random
+          max-value: 2147483647
+          min-value: 0
+      - name: encryption_level
+        type: numeric
+        nullable: true
+        max-length: 16
+        generator: integer
+        options:
+          generator-type: random
+          max-value: 32767
+          min-value: 0
+      - name: confidence
+        type: decimal
+        nullable: true
+        max-length: 24
+        generator: decimal
+      - name: created_date
+        type: date
+        nullable: true
+        generator: timestamp
+        options:
+          timezone: true
+          min-year: 1900
+          max-year: 2021
