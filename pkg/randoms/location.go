@@ -29,6 +29,11 @@ var (
 	citiesByStateCode = MapInterface{
 		"US-NY": {
 			City{"New York"},
+			City{"Buffalo"},
+			City{"Albany"},
+			City{"Yonkers"},
+			City{"Rochester"},
+			City{"Syracuse"},
 		},
 	}
 )

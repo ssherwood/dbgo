@@ -23,6 +23,8 @@ func CreateGeneratorFromType(generatorType common.DataGeneratorType, options map
 		return &StringGenerator{options}
 	case common.GeneratorTypeTimestamp:
 		return &TimestampGenerator{options}
+	case common.GeneratorTypeLocation:
+		return &LocationGenerator{options}
 	default:
 		fmt.Println("!!! Missing generatorType ", generatorType)
 		return &DefaultGenerator{options}

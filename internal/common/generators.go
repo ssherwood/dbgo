@@ -12,6 +12,7 @@ const (
 	GeneratorTypeString     DataGeneratorType = "string"
 	GeneratorTypeCustomList DataGeneratorType = "custom-list"
 	GeneratorTypeTimestamp  DataGeneratorType = "timestamp"
+	GeneratorTypeLocation   DataGeneratorType = "location"
 	GeneratorTypeUUID       DataGeneratorType = "uuid"
 )
 
@@ -32,30 +33,28 @@ const (
 	StringGeneratorOptionMaxLength = "max-length"
 	StringGeneratorOptionMinLength = "min-length"
 
+	LocationGeneratorTypeCity = "city"
+
 	CustomListTypeSequential = "sequential"
 	CustomListTypeWeighted   = "weighted"
 	CustomListTypeRandom     = "random"
 	CustomListOptionValues   = "values"
 )
 
-//
 // FilterParam returns true if the generator type determines if it should be
 // excluded from the query params (this is typically only for the "default"
 // generator which implies it will be handled using the native database
 // default).
-//
 func (g *DataGeneratorType) FilterParam() bool {
 	return *g == GeneratorTypeDefault
 }
 
-//
 // DefaultOptions produces a basic option defaults for a given generator type.
 // These have very limited visibility into the data types or other options that
 // may be further used to customize the generator behavior.
 //
 // Note, maxSize may represent the maximum length or maximum bit size depending
 // on the generator type.
-//
 func (g *DataGeneratorType) DefaultOptions(maxSize int) map[string]any {
 	switch *g {
 	case GeneratorTypeString:

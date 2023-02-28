@@ -34,7 +34,7 @@ tables:
       - name: city
         type: character
         max-length: 255
-        generator: city
+        generator: location
       - name: state
         type: string
         max-length: 255
