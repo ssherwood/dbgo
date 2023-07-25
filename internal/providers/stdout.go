@@ -51,7 +51,7 @@ func extractColValues(columns []generator.ColumnDefinition, rowNum int) []string
 	var values []string
 	for i := 0; i < len(columns); i++ {
 		columnValue := fmt.Sprintf("%v", columns[i].Generator.Generate(columns[i], rowNum))
-		if columns[i].Type.Quoted() {
+		if columns[i].Type.QuotedSQL() {
 			values = append(values, fmt.Sprintf("'%s'", strings.ReplaceAll(columnValue, "'", `''`)))
 		} else {
 			if columnValue == "<nil>" {

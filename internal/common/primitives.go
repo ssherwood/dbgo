@@ -17,7 +17,8 @@ const (
 	PrimitiveUUID      PrimitiveDataType = "uuid"
 )
 
-func (p *PrimitiveDataType) Quoted() bool {
+// QuotedSQL return a bool true if the PrimitiveDataType should be quoted in SQL output.
+func (p *PrimitiveDataType) QuotedSQL() bool {
 	switch *p {
 	case PrimitiveCharacter:
 		return true
@@ -30,6 +31,7 @@ func (p *PrimitiveDataType) Quoted() bool {
 	return false
 }
 
+// DefaultValue returns a default PrimitiveDataType value which may be used by a higher level generator.
 func (p *PrimitiveDataType) DefaultValue(maxSize int) any {
 	switch *p {
 	case PrimitiveBoolean:
